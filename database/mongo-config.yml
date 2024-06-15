@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+  namespace: productapp
+data:
+  MONGO_INITDB_DATABASE: "ProductDb"
