@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productapi-deployment
+  namespace: productapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: productapi
+  template:
+    metadata:
+      labels:
+        app: productapi
+    spec:
+      containers:
+      - name: productapi
+        image: jovan141/productapi:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ASPNETCORE_URLS
+          value: "http://*:80"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+          subPath: appsettings.json
+      volumes:
+      - name: config-volume
+        configMap:
+          name: productapi-config
+          items:
+          - key: APPSETTINGS_JSON
+            path: appsettings.json
