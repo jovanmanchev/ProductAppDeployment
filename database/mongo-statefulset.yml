@@ -24,16 +24,6 @@ spec:
         - name: mongo-data
           mountPath: /data/db
         env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: mongo-user
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: mongo-password
         - name: MONGO_INITDB_DATABASE
           valueFrom:
             configMapKeyRef:
